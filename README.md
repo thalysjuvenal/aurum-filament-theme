@@ -1,11 +1,11 @@
 # Aurum — Filament v5 Theme
 
-🇬🇧 **English** | [🇧🇷 Português](README.pt-BR.md)
+🇬🇧 **English** | [🇧🇷 Português](https://github.com/thalysjuvenal/aurum-filament-theme/blob/main/README.pt-BR.md)
 
 **An executive gold-on-graphite theme engine and UI kit for FilamentPHP v5 panels.**
 
 [![CI](https://github.com/thalysjuvenal/aurum-filament-theme/actions/workflows/ci.yml/badge.svg)](https://github.com/thalysjuvenal/aurum-filament-theme/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/thalysjuvenal/aurum-filament-theme/blob/main/LICENSE)
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/thalysjuvenal/aurum-filament-theme.svg?style=flat-square)](https://packagist.org/packages/thalysjuvenal/aurum-filament-theme)
 [![Total Downloads](https://img.shields.io/packagist/dt/thalysjuvenal/aurum-filament-theme.svg?style=flat-square)](https://packagist.org/packages/thalysjuvenal/aurum-filament-theme)
@@ -16,19 +16,19 @@
 
 | Dashboard — dark | Dashboard — light |
 |---|---|
-| ![Gold dashboard, dark mode](art/gold-dashboard-dark.png) | ![Gold dashboard, light mode](art/gold-dashboard-light.png) |
+| ![Gold dashboard, dark mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/gold-dashboard-dark.png) | ![Gold dashboard, light mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/gold-dashboard-light.png) |
 
 | Login | Orders |
 |---|---|
-| ![Login page with Aurum brand block](art/gold-login.png) | ![Orders table](art/gold-orders.png) |
+| ![Login page with Aurum brand block](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/gold-login.png) | ![Orders table](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/gold-orders.png) |
 
 **Presets — dashboard, dark and light**
 
 | Preset | Dashboard — dark | Dashboard — light |
 |---|---|---|
-| Emerald | ![Emerald dashboard, dark mode](art/emerald-dashboard-dark.png) | ![Emerald dashboard, light mode](art/emerald-dashboard-light.png) |
-| Sapphire | ![Sapphire dashboard, dark mode](art/sapphire-dashboard-dark.png) | ![Sapphire dashboard, light mode](art/sapphire-dashboard-light.png) |
-| Ruby | ![Ruby dashboard, dark mode](art/ruby-dashboard-dark.png) | ![Ruby dashboard, light mode](art/ruby-dashboard-light.png) |
+| Emerald | ![Emerald dashboard, dark mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/emerald-dashboard-dark.png) | ![Emerald dashboard, light mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/emerald-dashboard-light.png) |
+| Sapphire | ![Sapphire dashboard, dark mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/sapphire-dashboard-dark.png) | ![Sapphire dashboard, light mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/sapphire-dashboard-light.png) |
+| Ruby | ![Ruby dashboard, dark mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/ruby-dashboard-dark.png) | ![Ruby dashboard, light mode](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/ruby-dashboard-light.png) |
 
 Preset login screenshots are in the [Presets](#presets) section below.
 
@@ -47,7 +47,7 @@ Preset login screenshots are in the [Presets](#presets) section below.
 - PHP `^8.2`
 - `filament/filament` `^5.0`
 
-> Contributing to this package (running the test suite) requires PHP `>= 8.3` — see [CONTRIBUTING.md](CONTRIBUTING.md).
+> Contributing to this package (running the test suite) requires PHP `>= 8.3` — see [CONTRIBUTING.md](https://github.com/thalysjuvenal/aurum-filament-theme/blob/main/CONTRIBUTING.md).
 
 ## Installation
 
@@ -86,16 +86,16 @@ use ThalysJuvenal\Aurum\Presets\Sapphire;
 
 | Preset | Login | Class |
 |---|---|---|
-| Gold (default) | ![Gold login](art/gold-login.png) | `ThalysJuvenal\Aurum\Presets\Gold` |
-| Emerald | ![Emerald login](art/emerald-login.png) | `ThalysJuvenal\Aurum\Presets\Emerald` |
-| Sapphire | ![Sapphire login](art/sapphire-login.png) | `ThalysJuvenal\Aurum\Presets\Sapphire` |
-| Ruby | ![Ruby login](art/ruby-login.png) | `ThalysJuvenal\Aurum\Presets\Ruby` |
+| Gold (default) | ![Gold login](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/gold-login.png) | `ThalysJuvenal\Aurum\Presets\Gold` |
+| Emerald | ![Emerald login](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/emerald-login.png) | `ThalysJuvenal\Aurum\Presets\Emerald` |
+| Sapphire | ![Sapphire login](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/sapphire-login.png) | `ThalysJuvenal\Aurum\Presets\Sapphire` |
+| Ruby | ![Ruby login](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/ruby-login.png) | `ThalysJuvenal\Aurum\Presets\Ruby` |
 
 **Buttons, per preset (light mode)**
 
 | Gold | Emerald | Sapphire | Ruby |
 |---|---|---|---|
-| ![Gold buttons — solid, outlined, sizes and states](art/buttons-gold.png) | ![Emerald buttons — solid, outlined, sizes and states](art/buttons-emerald.png) | ![Sapphire buttons — solid, outlined, sizes and states](art/buttons-sapphire.png) | ![Ruby buttons — solid, outlined, sizes and states](art/buttons-ruby.png) |
+| ![Gold buttons — solid, outlined, sizes and states](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/buttons-gold.png) | ![Emerald buttons — solid, outlined, sizes and states](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/buttons-emerald.png) | ![Sapphire buttons — solid, outlined, sizes and states](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/buttons-sapphire.png) | ![Ruby buttons — solid, outlined, sizes and states](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/buttons-ruby.png) |
 
 All four presets pass the package's WCAG contrast gates (`tests/PresetContrastTest.php`): AA for dark-mode button text, large-text AA for light-mode button text, and a minimum 3:1 accent-on-background ratio.
 
@@ -159,7 +159,7 @@ Read the source under `src/Widgets` and `src/Schemas` for the full API; the exam
 
 Every stock Filament field type themed end to end — text inputs with affixes, sliders, selects, radios, checkboxes, and toggles all pick up the active preset's accent automatically:
 
-![Form fields — text inputs, selects, radio, checkbox list and toggle, Gold preset](art/form-fields-gold.png)
+![Form fields — text inputs, selects, radio, checkbox list and toggle, Gold preset](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/form-fields-gold.png)
 
 ### `AurumStatsOverview` + `AurumStat`
 
@@ -222,7 +222,7 @@ Timeline::make()
 
 | Gold | Emerald | Sapphire | Ruby |
 |---|---|---|---|
-| ![Timeline, Gold preset — active step with a gold dot and ring](art/timeline-gold.png) | ![Timeline, Emerald preset — active step with an emerald dot and ring](art/timeline-emerald.png) | ![Timeline, Sapphire preset — active step with a sapphire dot and ring](art/timeline-sapphire.png) | ![Timeline, Ruby preset — active step with a ruby dot and ring](art/timeline-ruby.png) |
+| ![Timeline, Gold preset — active step with a gold dot and ring](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/timeline-gold.png) | ![Timeline, Emerald preset — active step with an emerald dot and ring](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/timeline-emerald.png) | ![Timeline, Sapphire preset — active step with a sapphire dot and ring](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/timeline-sapphire.png) | ![Timeline, Ruby preset — active step with a ruby dot and ring](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/timeline-ruby.png) |
 
 ### `TotalsBlock` + `TotalsRow`
 
@@ -240,7 +240,7 @@ TotalsBlock::make()
 
 | Dark | Light |
 |---|---|
-| ![TotalsBlock, dark mode — Subtotal, Shipping and Total rows with tabular numerals](art/totals-block-dark.png) | ![TotalsBlock, light mode — Subtotal, Shipping and Total rows with tabular numerals](art/totals-block-light.png) |
+| ![TotalsBlock, dark mode — Subtotal, Shipping and Total rows with tabular numerals](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/totals-block-dark.png) | ![TotalsBlock, light mode — Subtotal, Shipping and Total rows with tabular numerals](https://raw.githubusercontent.com/thalysjuvenal/aurum-filament-theme/main/art/totals-block-light.png) |
 
 ### Theme-aware charts
 
@@ -340,8 +340,8 @@ Planned for v2:
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for PHP version requirements, development scripts, and the pull request checklist.
+See [CONTRIBUTING.md](https://github.com/thalysjuvenal/aurum-filament-theme/blob/main/CONTRIBUTING.md) for PHP version requirements, development scripts, and the pull request checklist.
 
 ## License
 
-The MIT License (MIT). See [LICENSE](LICENSE) for more information.
+The MIT License (MIT). See [LICENSE](https://github.com/thalysjuvenal/aurum-filament-theme/blob/main/LICENSE) for more information.
