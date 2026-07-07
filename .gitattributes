@@ -1,0 +1,12 @@
+# Excluded from the Composer dist archive (composer install --prefer-dist)
+/art             export-ignore
+/tests           export-ignore
+/docs            export-ignore
+/.github         export-ignore
+/.gitattributes  export-ignore
+/.gitignore      export-ignore
+/.superpowers    export-ignore
+/PUBLISHING.md   export-ignore
+/phpunit.xml     export-ignore
+/pint.json       export-ignore
+/phpstan.neon    export-ignore

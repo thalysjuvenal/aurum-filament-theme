@@ -1,0 +1,13 @@
+/vendor
+/node_modules
+composer.lock
+.phpunit.result.cache
+.phpunit.cache
+/.idea
+/.vscode
+/docs
+.DS_Store
+.superpowers/
+.playwright-mcp/
+/workbench/storage
+/testbench.yaml.bak

@@ -1,0 +1,603 @@
+/*
+ * Aurum — executive graphite & gold theme for FilamentPHP v5.
+ * Plain CSS loaded via FilamentAsset (after Filament's own styles):
+ * overrides Tailwind v4/Filament CSS variables at runtime.
+ */
+
+/* IBM Plex Mono for numeric values, dates, codes. Instrument Sans comes from $panel->font(). */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+/* ---------- Preset accent (defaults = Gold; overridden by the preset's <style> tag) ---------- */
+:root {
+    --aurum-accent-300: #E8BC66;
+    --aurum-accent-400: #D9A441;
+    --aurum-accent-500: #C08A2E;
+    --aurum-accent-600: #A87A22;
+    --aurum-accent-rgb: 217, 164, 65; /* rgb of 400 — base for rgba() tints */
+    --aurum-on-accent-dark: #17130A;
+    --aurum-on-accent-light: #FFFFFF;
+    --aurum-logo-from: #E8BC66;
+    --aurum-logo-to: #B8862F;
+}
+
+/* ---------- Shape & typography tokens ---------- */
+:root {
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --radius-xl: 0.875rem; /* cards/modals 14px */
+    --radius-lg: 0.625rem; /* inputs/buttons 10px */
+}
+
+/* ---------- Surfaces — dark mode ----------
+   The variables below are fallbacks for surfaces without an explicit rule
+   (modals, dropdowns, popovers that derive from --color-gray-*). Filament
+   v5's primary surfaces (body, widget cards) do not read these variables at
+   runtime — hence the explicit `.dark .fi-*` rules below. */
+.dark {
+    --color-gray-950: #0F1013; /* sidebar */
+    --color-gray-900: #141519; /* background */
+    --color-gray-800: #1B1D22; /* cards/widgets */
+    --color-gray-700: #2A2C33; /* elevated */
+}
+
+.dark .fi-body,
+.dark .fi-main {
+    background-color: #141519;
+    color: #F0EFEA;
+}
+
+/* `.fi-wi-widget` is only the widget's grid wrapper — the actual visible
+   card is the native inner element (`.fi-section` for simple widgets,
+   `.fi-wi-stats-overview-stat` per KPI, `.fi-ta-ctn` for tables). Styling
+   the wrapper too creates a "box within a box" (wrapper's square corners
+   behind the inner card's 14px radius). `.fi-section-not-contained` groups
+   multiple widgets side by side (e.g. the stats-overview row) — Filament
+   itself marks it as "not contained" so it does NOT get card styling, but
+   it needs the same fix. */
+.dark .fi-section:not(.fi-section-not-contained),
+.dark .fi-wi-stats-overview-stat,
+.dark .fi-ta-ctn {
+    background-color: #1B1D22;
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+/* The input surface belongs to the WRAPPER (`.fi-input-wrp`), not the inner
+   control. When only `.fi-input`/`.fi-select-input` received the solid
+   #15161A background, the native wrapper (near-transparent) stayed visible
+   around it — a "box within a box" in global search, table search, and the
+   "Group by" select. The inner control is transparent so the wrapper is
+   the only surface. */
+.dark .fi-input-wrp {
+    background-color: #15161A;
+}
+
+.dark .fi-input,
+.dark .fi-select-input {
+    background-color: transparent;
+}
+
+/* ---------- Surfaces — light mode ---------- */
+:root:not(.dark) .fi-body,
+:root:not(.dark) .fi-main {
+    background-color: #F4F3EF;
+    color: #1D1E23;
+}
+
+:root:not(.dark) .fi-topbar {
+    background-color: #FDFCFA;
+}
+
+:root:not(.dark) .fi-section:not(.fi-section-not-contained),
+:root:not(.dark) .fi-wi-stats-overview-stat,
+:root:not(.dark) .fi-ta-ctn {
+    background-color: #FFFFFF;
+    border-color: #E6E4DE;
+    box-shadow: 0 1px 2px rgba(29, 30, 35, 0.04);
+}
+
+/* ---------- Elevated surfaces: dropdowns, modals, slide-overs ----------
+   Floating panels (.fi-dropdown-panel / .fi-modal-window) inherit
+   --color-gray-800 (= #1B1D22, the card color) by default; they need the
+   "elevated" #2A2C33 tone instead in dark mode. */
+.dark .fi-dropdown-panel,
+.dark .fi-modal-window {
+    background-color: #2A2C33;
+}
+
+:root:not(.dark) .fi-dropdown-panel,
+:root:not(.dark) .fi-modal-window {
+    background-color: #FFFFFF;
+}
+
+/* The floating toast notification (.fi-no-notification, inside the .fi-no
+   stack teleported to the body) sits outside .fi-dropdown-panel/.fi-modal-window
+   and so doesn't inherit the elevated tone — it falls back to Tailwind's
+   default zinc gray (~#18181B) in dark mode. In light mode it already lands
+   on white by coincidence (component default), so only dark mode needs an
+   explicit rule here. */
+.dark .fi-no-notification {
+    background-color: #2A2C33;
+    border-color: rgba(255, 255, 255, 0.07);
+}
+
+/* The ColorPicker popover (.fi-fo-color-picker-panel) receives NO styling
+   from Filament — transparent background, no border, no padding — and
+   floats loose over the content below in both modes. Applies the same
+   elevated tone as other floating panels plus inner padding. */
+.fi-fo-color-picker-panel {
+    padding: 0.75rem;
+    overflow: hidden;
+}
+
+/* Even with the panel rounded, the saturation/hue square of the
+   <hex-color-picker> (a web component with its own canvas, 0px corners by
+   default) stayed square inside the rounded panel — the most visible part
+   of the popover looked "squared off". overflow:hidden + radius on the
+   custom element's own host clips the content painted in the shadow DOM,
+   so it works without needing ::part(). */
+.fi-fo-color-picker-panel hex-color-picker {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.dark .fi-fo-color-picker-panel {
+    background-color: #2A2C33;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+:root:not(.dark) .fi-fo-color-picker-panel {
+    background-color: #FFFFFF;
+    border: 1px solid #E6E4DE;
+}
+
+/* The FileUpload dropzone (.filepond--hopper) uses white at 5% opacity in
+   dark mode — much lighter than the #15161A input surface used by every
+   other field, breaking the "input box" consistency. Aligns it to the input
+   token in dark mode (light mode already uses white, like the cards, and
+   stays unchanged). */
+.dark .fi-fo-file-upload .filepond--root.filepond--hopper {
+    background-color: #15161A;
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+/* ---------- Pagination: gold active page + mono values ---------- */
+.fi-pagination-item-label {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+}
+
+.fi-pagination-item.fi-active .fi-pagination-item-btn {
+    background-color: rgba(var(--aurum-accent-rgb), 0.14);
+    border: 1px solid rgba(var(--aurum-accent-rgb), 0.35);
+    color: var(--aurum-accent-300);
+}
+
+:root:not(.dark) .fi-pagination-item.fi-active .fi-pagination-item-btn {
+    color: var(--aurum-accent-600);
+}
+
+/* ---------- Primary button gradients ----------
+   Dark: subtle 300→500 gradient, on-accent-dark text.
+   Light: 500→600 gradient, white text (AA: white on 500–600 ≥ 4.5:1).
+   Solid variants only (:not(.fi-outlined)); hover darkens via filter to
+   keep the 140ms transition (background-image isn't animatable). */
+:root:not(.dark) .fi-btn.fi-color-primary:not(.fi-outlined) {
+    background-image: linear-gradient(180deg, var(--aurum-accent-500), var(--aurum-accent-600));
+    background-color: var(--aurum-accent-600); /* fallback/disabled */
+    color: var(--aurum-on-accent-light);
+}
+
+.dark .fi-btn.fi-color-primary:not(.fi-outlined) {
+    background-image: linear-gradient(180deg, var(--aurum-accent-300), var(--aurum-accent-500));
+    background-color: var(--aurum-accent-500);
+    color: var(--aurum-on-accent-dark);
+}
+
+.fi-btn.fi-color-primary:not(.fi-outlined) {
+    transition: filter 140ms ease, box-shadow 140ms ease;
+}
+
+.fi-btn.fi-color-primary:not(.fi-outlined):hover {
+    filter: brightness(0.92);
+}
+
+/* ---------- Utility for numeric columns ---------- */
+.aurum-mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Stat widget KPIs use mono font (value 25px/600) */
+.fi-wi-stats-overview-stat-value {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Signature: sidebar is ALWAYS dark (light and dark mode) ---------- */
+.fi-sidebar,
+.fi-sidebar-header,
+.fi-sidebar-nav {
+    background-color: #0F1013 !important;
+}
+
+.fi-sidebar {
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.fi-sidebar .fi-sidebar-item-label {
+    color: #A6A8AF;
+    font-size: 13px;
+}
+
+.fi-sidebar .fi-sidebar-item-icon {
+    color: #70737C;
+}
+
+.fi-sidebar .fi-sidebar-item-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active .fi-sidebar-item-btn {
+    background-color: rgba(var(--aurum-accent-rgb), 0.11);
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item.fi-active .fi-sidebar-item-icon {
+    color: var(--aurum-accent-300);
+}
+
+.fi-sidebar .fi-sidebar-group-label {
+    color: #5C5F68;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+/* ---------- Tables ---------- */
+.dark .fi-ta-row:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+:root:not(.dark) .fi-ta-row:hover {
+    background-color: #FAF9F6;
+}
+
+.fi-ta-row.fi-selected {
+    background-color: rgba(var(--aurum-accent-rgb), 0.05);
+}
+
+.fi-ta-header-cell {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+/* ---------- Badges (pill, 11.5px/600 text) ---------- */
+.fi-badge {
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+}
+
+/* ---------- Tabs (schema + listing): gold active tab ---------- */
+.fi-tabs-item.fi-active {
+    color: var(--aurum-accent-300);
+    background-color: rgba(var(--aurum-accent-rgb), 0.11);
+    box-shadow: inset 0 -2px 0 var(--aurum-accent-400);
+}
+
+.fi-tabs-item.fi-active .fi-tabs-item-icon {
+    color: var(--aurum-accent-300);
+}
+
+:root:not(.dark) .fi-tabs-item.fi-active,
+:root:not(.dark) .fi-tabs-item.fi-active .fi-tabs-item-icon {
+    color: var(--aurum-accent-600);
+}
+
+/* ---------- Disabled toggle: #3A3D45 surface ---------- */
+.dark .fi-toggle.fi-toggle-off {
+    background-color: #3A3D45;
+}
+
+/* ---------- Gold focus ring on any field ----------
+   The focus color/ring must live ONLY on `.fi-input-wrp` (10px radius).
+   TextInput's `.fi-input-wrp` has `overflow: hidden`, so the square
+   box-shadow this rule would also paint on the inner `.fi-input`/
+   `.fi-select-input` (0 radius, and for TextInput the input is smaller than
+   the wrapper) gets clipped by the wrapper itself — invisible, masking any
+   bug. But the DatePicker/TimePicker wrapper (`.fi-fo-date-time-picker`) has
+   `overflow: visible` and its native input fills the SAME rectangle as the
+   wrapper (no padding), so the input's square box-shadow would show up on
+   top of the wrapper's rounded ring — a halo with square corners.
+   `.fi-input`/`.fi-select-input` have no visible border of their own
+   (border-width 0 in Filament — the visible border always belongs to the
+   wrapper), so removing their box-shadow/border-color loses nothing
+   visually; only `outline: none` is kept to suppress the browser's native
+   outline. */
+.fi-input-wrp:focus-within {
+    border-color: var(--aurum-accent-400);
+    box-shadow: 0 0 0 3px rgba(var(--aurum-accent-rgb), 0.15);
+}
+
+.fi-input:focus,
+.fi-select-input:focus {
+    outline: none;
+}
+
+/* ---------- Slider: gold fill consistent with the light/dark pattern ----------
+   Filament paints .noUi-connect with `bg-primary-500 dark:bg-primary-600`.
+   On this "gold" scale, 500 (accent-500) is lighter than 600 (accent-600) —
+   the opposite of the theme's pattern (buttons/tabs/focus use a LIGHTER gold
+   in dark mode, accent-400/accent-300, and a DARKER one in light mode,
+   accent-500/accent-600). Without this override the fill would be
+   darker/duller in dark mode than in light mode. Pins the dark-mode
+   reference gold (accent-400) in dark mode only; light mode already uses
+   accent-500 (primary-500) via Filament, matching the checked state of
+   Toggle/Checkbox. */
+.dark .fi-fo-slider .noUi-connect {
+    background-color: var(--aurum-accent-400);
+}
+
+/* ---------- Affix (prefix/suffix) divider in dark mode ----------
+   Filament paints the divider between the input and its affix
+   (`.fi-input-wrp-suffix`/`-prefix`, used by the password-reveal button and
+   prefixes like "R$"/"kg") with `border-color: var(--gray-200)` by default,
+   only swapping to a light tone in dark mode via the
+   `:where(.dark, .dark *)` selector. Two surfaces in this theme never get
+   the Filament `.dark` class and so never trigger that swap: (1) the login
+   page (`.fi-simple-layout`), which stays dark regardless of the panel's
+   mode (see block below), and (2) the admin panel itself when in light/
+   system mode — though there the rule only matters once `.dark` is
+   actually active. Without this override the divider would inherit
+   Filament's light gray (~gray-200) and show up as a bright line over the
+   dark input background. Uses a neutral tone consistent with the theme's
+   other dividers (white rgba .05–.06) for both the always-dark login
+   context and the panel's standard `.dark` mode. */
+.fi-simple-layout .fi-input-wrp-suffix:not(.fi-inline),
+.fi-simple-layout .fi-input-wrp-prefix:not(.fi-inline),
+.dark .fi-input-wrp-suffix:not(.fi-inline),
+.dark .fi-input-wrp-prefix:not(.fi-inline) {
+    border-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Short transitions, no decorative animation ---------- */
+.fi-sidebar-item-btn,
+.fi-ta-row,
+.fi-input-wrp,
+.fi-btn {
+    transition: background-color 140ms ease, border-color 140ms ease,
+        box-shadow 140ms ease, color 140ms ease;
+}
+
+/* ---------- Login (simple layout) ---------- */
+.fi-simple-layout {
+    background-color: #101114;
+    background-image:
+        radial-gradient(ellipse 70% 45% at 50% -8%, rgba(var(--aurum-accent-rgb), 0.13), transparent),
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: auto, 44px 44px, 44px 44px;
+    /* Native `.fi-simple-layout` is flex-col WITHOUT justify-center — the
+       child `.fi-simple-main-ctn` (flex-grow + items-center) is what
+       centers, and it centers ONLY the card in the remaining space. The
+       brand block from the SIMPLE_LAYOUT_START render hook (a sibling
+       before main-ctn) would otherwise sit pinned to the top of the
+       viewport, away from the card. To keep the brand block and card
+       traveling together as ONE centered column: centers the whole column
+       here and removes grow/margins below. The gap between brand and card
+       is handled by margin-bottom: 28px on .aurum-auth-brand. Vertical
+       padding protects short viewports (content scrolls instead of
+       touching the edges). */
+    justify-content: center;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+/* No grow: the card container shrinks to the card's size and the whole
+   column (brand + card) is centered by the layout's justify-content. */
+.fi-simple-main-ctn {
+    flex-grow: 0;
+}
+
+.fi-simple-main {
+    max-width: 400px;
+    background-color: #1B1D22;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+    /* Native my-16 added 64px between brand and card, throwing off the
+       column's vertical center; the gap already comes from the brand
+       block's margin-bottom. */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Filament's default logo (`x-filament-panels::logo`, brand name text or
+   image) renders INSIDE the card header (.fi-simple-header), above the
+   sign-in heading. Since the theme's own brand block (square + wordmark +
+   tagline, see resources/views/login-brand.blade.php) is drawn ABOVE the
+   card via a layout render hook, the native logo becomes a duplicate mark
+   loose inside the card. Hidden on all simple-layout pages (login,
+   register, password reset) to avoid the duplication — brand identity
+   already comes from the block above the card. */
+.fi-simple-layout .fi-simple-header .fi-logo {
+    display: none;
+}
+
+/* Auth form labels are plain "Email"/"Password" without a required
+   asterisk. Scoped to the simple layout (auth pages) so it does NOT affect
+   admin forms, where the required mark `*` (#E07A78) is still shown. */
+.fi-simple-layout .fi-fo-field-label-required-mark {
+    display: none;
+}
+
+/* ---------- Brand block above the card ----------
+   See resources/views/login-brand.blade.php + AurumTheme::registerAuthBrandRenderHook(). */
+.aurum-auth-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+}
+
+.aurum-auth-brand-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--aurum-logo-from), var(--aurum-logo-to));
+    box-shadow: 0 8px 24px rgba(var(--aurum-accent-rgb), 0.25);
+    color: #141519;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.aurum-auth-brand-logo {
+    display: block;
+    width: auto;
+    max-width: 220px;
+    height: 44px;
+    object-fit: contain;
+}
+
+.aurum-auth-brand-text {
+    text-align: center;
+}
+
+.aurum-auth-brand-name {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: #F0EFEA;
+}
+
+.aurum-auth-brand-tagline {
+    margin-top: 2px;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: #70737C;
+}
+
+/* ---------- Login is always dark: card content stays dark-mode even when
+   the panel is in light/system mode. ---------- */
+
+/* The card header (`.fi-simple-header`) is centered by default
+   (`flex flex-col items-center`) in Filament's native CSS — the design
+   calls for heading + subheading LEFT-aligned inside the card (a deliberate
+   contrast with the centered brand block above). */
+.fi-simple-layout .fi-simple-header {
+    align-items: flex-start;
+}
+
+.fi-simple-layout .fi-simple-header-heading {
+    color: #F0EFEA;
+    text-align: left;
+}
+
+.fi-simple-layout .fi-simple-header-subheading,
+.fi-simple-layout .fi-fo-field-label,
+.fi-simple-layout .fi-fo-field-label-content,
+.fi-simple-layout label {
+    color: #C9CBD1;
+}
+
+.fi-simple-layout .fi-simple-header-subheading {
+    text-align: left;
+}
+
+/* The "Forgot password?" link is already on the SAME line as the "Password"
+   label — it's registered via `->hint()` on the password field
+   (Filament\Auth\Pages\Login::getPasswordFormComponent()), and Filament
+   places the hint in `.fi-fo-field-label-ctn` (after the `<label>`), whose
+   native layout is already `flex justify-between` — no DOM reordering
+   needed. Only the gold color was missing; scoped to the link inside the
+   label row so it doesn't repaint other links (e.g. the "powered by"
+   footer) in the simple layout. */
+.fi-simple-layout .fi-fo-field-label-ctn .fi-link {
+    color: var(--aurum-accent-400);
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.fi-simple-layout .fi-input-wrp {
+    background-color: #15161A;
+    border-color: rgba(255, 255, 255, 0.09);
+}
+
+.fi-simple-layout .fi-input {
+    background-color: transparent;
+    color: #F0EFEA;
+}
+
+.fi-simple-layout .fi-input::placeholder {
+    color: #70737C;
+}
+
+/* Login is always dark: the sign-in button uses the dark treatment even
+   when the panel is in light/system mode. (:root raises specificity to tie
+   with the light rule above; the tie resolves by source order.) */
+:root .fi-simple-layout .fi-btn.fi-color-primary:not(.fi-outlined) {
+    background-image: linear-gradient(180deg, var(--aurum-accent-300), var(--aurum-accent-500));
+    background-color: var(--aurum-accent-500);
+    color: var(--aurum-on-accent-dark);
+}
+
+/* ---------- Aurum components: StatCard ---------- */
+.aurum-stats-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.aurum-stat { padding: 20px 22px; }
+.aurum-stat-header { display: flex; align-items: center; justify-content: space-between; }
+.aurum-stat-label { font-size: 11.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #8B8E96; }
+.aurum-stat-icon { width: 18px; height: 18px; color: var(--aurum-accent-400); }
+.aurum-stat-value { font-size: 25px; font-weight: 600; margin-top: 6px; font-variant-numeric: tabular-nums; }
+.aurum-stat-footer { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.aurum-stat-trend { border-radius: 999px; font-size: 11.5px; font-weight: 600; padding: 1px 8px; }
+.aurum-stat-trend.is-up { color: #5FBE8E; background: rgba(70, 165, 120, 0.14); }
+.aurum-stat-trend.is-down { color: #E07A78; background: rgba(210, 96, 94, 0.14); }
+.aurum-stat-trend.is-neutral { color: #8B8E96; background: rgba(255, 255, 255, 0.06); }
+:root:not(.dark) .aurum-stat-trend.is-up { color: #1F7A4D; }
+:root:not(.dark) .aurum-stat-trend.is-down { color: #B0433F; }
+.aurum-stat-description { font-size: 12px; color: #70737C; }
+
+/* ---------- Aurum components: ValueList ---------- */
+.aurum-value-list { padding: 20px 22px; }
+.aurum-vl-heading { font-size: 14.5px; font-weight: 600; margin-bottom: 10px; }
+.aurum-vl-item { display: flex; align-items: center; gap: 10px; min-height: 44px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+.aurum-vl-item:first-child { border-top: 0; }
+:root:not(.dark) .aurum-vl-item { border-top-color: #E6E4DE; }
+.aurum-vl-dot { width: 8px; height: 8px; border-radius: 999px; flex: none; }
+.aurum-vl-dot.is-success { background: #46A578; }
+.aurum-vl-dot.is-warning { background: #D98B41; }
+.aurum-vl-dot.is-danger { background: #D2605E; }
+.aurum-vl-dot.is-info { background: #6B93D6; }
+.aurum-vl-dot.is-muted { background: #5C5F68; }
+.aurum-vl-label { font-size: 13px; flex: 1; min-width: 0; }
+.aurum-vl-value { font-size: 13px; font-weight: 500; }
+
+/* ---------- Aurum components: Timeline ---------- */
+.aurum-timeline { position: relative; margin: 0; padding: 0; list-style: none; }
+.aurum-tl-item { position: relative; display: flex; gap: 12px; padding: 0 0 18px 0; }
+.aurum-tl-item::before { content: ''; position: absolute; left: 4px; top: 14px; bottom: 0; width: 1px; background: rgba(255, 255, 255, 0.07); }
+.aurum-tl-item:last-child::before { display: none; }
+:root:not(.dark) .aurum-tl-item::before { background: #E6E4DE; }
+.aurum-tl-dot { width: 9px; height: 9px; border-radius: 999px; background: #5C5F68; flex: none; margin-top: 4px; z-index: 1; }
+.aurum-tl-dot.is-active { background: var(--aurum-accent-400); box-shadow: 0 0 0 3px rgba(var(--aurum-accent-rgb), 0.15); }
+.aurum-tl-body { display: flex; flex-direction: column; gap: 2px; }
+.aurum-tl-title { font-size: 13px; font-weight: 500; }
+.aurum-tl-description { font-size: 12.5px; color: #8B8E96; }
+.aurum-tl-time { font-size: 11.5px; color: #70737C; }
+
+/* ---------- Aurum components: TotalsBlock ---------- */
+.aurum-totals { background: #181A1F; border-radius: 10px; padding: 14px 16px; }
+:root:not(.dark) .aurum-totals { background: #FAF9F6; }
+.aurum-totals-row { display: flex; justify-content: space-between; font-size: 12.5px; color: #8B8E96; padding: 3px 0; }
+:root:not(.dark) .aurum-totals-row { color: #5D5F66; }
+.aurum-totals-total { display: flex; justify-content: space-between; font-size: 14.5px; font-weight: 600; margin-top: 8px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+:root:not(.dark) .aurum-totals-total { border-top-color: #E6E4DE; }
+.aurum-totals .aurum-mono { font-variant-numeric: tabular-nums; }

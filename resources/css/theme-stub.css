@@ -1,0 +1,14 @@
+/*
+ * Optional Vite theme for apps that compile their own Filament theme
+ * (lets you use your own Tailwind classes alongside Aurum).
+ * Register on the panel: ->viteTheme('resources/css/filament/admin/aurum-theme.css')
+ * and add it to vite.config.js's input. Aurum's CSS still comes from the plugin.
+ */
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --radius-xl: 0.875rem; /* cards 14px  */
+    --radius-lg: 0.625rem; /* inputs 10px */
+}

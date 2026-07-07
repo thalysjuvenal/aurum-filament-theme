@@ -1,0 +1,41 @@
+name: Feature Request
+description: Suggest an idea or enhancement for the Aurum Filament Theme
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe the problem and your proposed solution below.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem / motivation
+      description: What problem are you trying to solve? Why is this needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Describe the solution you'd like to see.
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative solutions or workarounds you've considered.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: roadmap
+    attributes:
+      label: Roadmap alignment
+      options:
+        - label: I've checked that this request is aligned with the roadmap in the README.
+          required: true
