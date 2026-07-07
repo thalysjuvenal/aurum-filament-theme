@@ -22,13 +22,13 @@
 
 ## 4. Submit to the filamentphp.com/plugins gallery
 
-- [ ] Check the current submission process at the time of publishing (the Filament docs' "Publishing" section under [filamentphp.com/docs](https://filamentphp.com/docs) — the process has changed between Filament versions, so re-verify rather than assuming this list is current).
-- [ ] Prepare the assets the gallery typically requires:
-  - [ ] Plugin icon/logo (square, per the gallery's current size spec).
-  - [ ] Screenshots (the `art/` directory already has dashboard, login, and orders screenshots for Gold plus dark-mode dashboards for Emerald/Sapphire/Ruby — resize/crop per the gallery's requirements).
-  - [ ] Short description and long description copy (can be adapted from this README's tagline and Features section).
-  - [ ] Packagist package name (`thalysjuvenal/aurum-filament-theme`) and GitHub URL.
-- [ ] Submit via the gallery's current form/PR process.
+> Process verified 2026-07-07: the old PR-based repository (`filamentphp/filamentphp.com`)
+> is **archived**. Submissions now happen through an admin UI on the site.
+
+- [ ] Request author-profile access at <https://filamentphp.com/author> (GitHub login; approval is manual and may take a while).
+- [x] Assets prepared: `art/icon.png` (512², transparent), `art/banner.png` (2560×1280), screenshot set in `art/`.
+- [x] Copy prepared: short + long descriptions, category suggestions (local kit, not committed).
+- [ ] Once approved, submit the plugin via the author dashboard using the prepared kit.
 
 ## 5. Uncomment the Packagist badges
 
