@@ -2,22 +2,24 @@ name: CI
 on:
   push: { branches: [main] }
   pull_request:
+permissions:
+  contents: read
 jobs:
   tests:
     runs-on: ubuntu-latest
     strategy:
       matrix: { php: ['8.3', '8.4'] }
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with: { php-version: '${{ matrix.php }}', coverage: none }
       - run: composer install --prefer-dist --no-interaction
       - run: vendor/bin/pest
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: shivammathur/setup-php@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with: { php-version: '8.3', coverage: none }
       - run: composer install --prefer-dist --no-interaction
       - run: vendor/bin/pint --test
