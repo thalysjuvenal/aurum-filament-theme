@@ -9,3 +9,4 @@
 /phpunit.xml     export-ignore
 /pint.json       export-ignore
 /phpstan.neon    export-ignore
+/phpstan-bootstrap.php export-ignore
