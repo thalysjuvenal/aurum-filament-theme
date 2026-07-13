@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-07-13
+
+### Changed
+
+- Supply-chain hardening: GitHub Actions pinned to full commit SHAs, least-privilege CI token, Dependabot configured for Composer and Actions with a 7-day update cooldown.
+- Slimmer Composer dist: `phpstan-bootstrap.php` (dev tooling) is no longer shipped in the release archive.
+- Documentation: absolute asset URLs so the README renders correctly on external documentation pages; community health files (issue forms, PR template, security policy, code of conduct).
+
 ## [1.1.1] - 2026-07-07
 
 ### Changed
