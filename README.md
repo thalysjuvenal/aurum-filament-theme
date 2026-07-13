@@ -9,6 +9,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/thalysjuvenal/aurum-filament-theme.svg?style=flat-square)](https://packagist.org/packages/thalysjuvenal/aurum-filament-theme)
 [![Total Downloads](https://img.shields.io/packagist/dt/thalysjuvenal/aurum-filament-theme.svg?style=flat-square)](https://packagist.org/packages/thalysjuvenal/aurum-filament-theme)
+[![Plumb score](https://plumbphp.dev/badges/thalysjuvenal/aurum-filament-theme/composite.svg)](https://plumbphp.dev/thalysjuvenal/aurum-filament-theme)
 
 ## Screenshots
 
